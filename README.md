@@ -13,7 +13,11 @@ Deploy OpnForm server with CI/CD on Elestio
 You can open OpnForm UI here:
 
     URL: https://[CI_CD_DOMAIN]
+    login: [ADMIN_EMAIL]
+    password: [ADMIN_PASSWORD]
 
-# First use
+You can open pgAdmin here:
 
-You will need to register for your first use.
+    URL: https://[CI_CD_DOMAIN]:20551
+    login: [ADMIN_EMAIL]
+    password: [ADMIN_PASSWORD]

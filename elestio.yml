@@ -7,6 +7,14 @@ ports:
     public: true
     path: "/"
     isAuth: false
+  - protocol: "HTTPS"
+    targetProtocol: "HTTP"
+    listeningPort: "20551"
+    targetPort: "49969"
+    targetIP: "172.17.0.1"
+    public: true
+    path: "/"
+    isAuth: false
 environments:
   - key: "SOFTWARE_VERSION_TAG"
     value: "latest"
@@ -20,8 +28,6 @@ environments:
     value: "OpnForm"
   - key: "APP_ENV"
     value: "local"
-  - key: "APP_KEY"
-    value: "random_password"
   - key: "APP_DEBUG"
     value: "false"
   - key: "APP_LOG_LEVEL"
@@ -33,7 +39,7 @@ environments:
   - key: "LOG_LEVEL"
     value: "debug"
   - key: "DB_CONNECTION"
-    value: "debug"
+    value: "pgsql"
   - key: "DB_HOST"
     value: "postgres"
   - key: "DB_PORT"
@@ -82,8 +88,6 @@ environments:
     value: "OpnForm"
   - key: "JWT_TTL"
     value: "1440"
-  - key: "JWT_SECRET"
-    value: "random_pasword"
 
 config:
   runTime: "dockerCompose"
@@ -104,5 +108,9 @@ lifeCycleConfig:
 webUI:
   - url: "https://[CI_CD_DOMAIN]"
     label: "OpnForm"
+    login: "[ADMIN_EMAIL]"
+    password: "[ADMIN_PASSWORD]"
+  - url: "https://[CI_CD_DOMAIN]:20551"
+    label: "pgAdmin"
     login: "[ADMIN_EMAIL]"
     password: "[ADMIN_PASSWORD]"
