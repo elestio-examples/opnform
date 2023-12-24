@@ -27,5 +27,3 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     ports:
       - "172.17.0.1:27779:5432"
-    networks:
-      - inet
