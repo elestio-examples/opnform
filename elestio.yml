@@ -15,6 +15,22 @@ ports:
     public: true
     path: "/"
     isAuth: false
+  - protocol: "HTTPS"
+    targetProtocol: "HTTP"
+    listeningPort: "41949"
+    targetPort: "12326"
+    targetIP: "172.17.0.1"
+    public: true
+    path: "/"
+    isAuth: false
+  - protocol: "HTTPS"
+    targetProtocol: "HTTP"
+    listeningPort: "49056"
+    targetPort: "62716"
+    targetIP: "172.17.0.1"
+    public: true
+    path: "/"
+    isAuth: false
 environments:
   - key: "SOFTWARE_VERSION_TAG"
     value: "latest"
@@ -88,6 +104,14 @@ environments:
     value: "OpnForm"
   - key: "JWT_TTL"
     value: "1440"
+  - key: "AWS_ACCESS_KEY_ID"
+    value: "minio"
+  - key: "AWS_SECRET_ACCESS_KEY"
+    value: "random_password"
+  - key: "AWS_DEFAULT_REGION"
+    value: "us-east-1"
+  - key: "AWS_BUCKET"
+    value: "opnform"
 
 config:
   runTime: "dockerCompose"
