@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  opnform:
+    image: jhumanj/opnform
+    restart: always
+    volumes:
+      - ./forms:/persist
+      - ./.env:/app/.env
+    ports:
+      - 172.17.0.1:35551:80
+    depends_on:
+      - postgres
+  redis:
+    image: elestio/redis:7.0
+    restart: always
+    volumes:
+      - ./redis-data:/data
+  postgres:
+    image: elestio/postgres:15
+    restart: always
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "172.17.0.1:27779:5432"
+    networks:
+      - inet
