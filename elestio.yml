@@ -15,22 +15,6 @@ ports:
     public: true
     path: "/"
     isAuth: false
-  - protocol: "HTTPS"
-    targetProtocol: "HTTP"
-    listeningPort: "41949"
-    targetPort: "12326"
-    targetIP: "172.17.0.1"
-    public: true
-    path: "/"
-    isAuth: false
-  - protocol: "HTTPS"
-    targetProtocol: "HTTP"
-    listeningPort: "49056"
-    targetPort: "62716"
-    targetIP: "172.17.0.1"
-    public: true
-    path: "/"
-    isAuth: false
 environments:
   - key: "SOFTWARE_VERSION_TAG"
     value: "latest"
@@ -67,9 +51,9 @@ environments:
   - key: "DB_PASSWORD"
     value: "random_password"
   - key: "FILESYSTEM_DRIVER"
-    value: "s3"
+    value: "local"
   - key: "FILESYSTEM_DISK"
-    value: "s3"
+    value: "local"
   - key: "BROADCAST_DRIVER"
     value: "log"
   - key: "CACHE_DRIVER"
@@ -104,14 +88,6 @@ environments:
     value: "OpnForm"
   - key: "JWT_TTL"
     value: "1440"
-  - key: "AWS_ACCESS_KEY_ID"
-    value: "minio"
-  - key: "AWS_SECRET_ACCESS_KEY"
-    value: "random_password"
-  - key: "AWS_DEFAULT_REGION"
-    value: "us-east-1"
-  - key: "AWS_BUCKET"
-    value: "opnform"
 
 config:
   runTime: "dockerCompose"
