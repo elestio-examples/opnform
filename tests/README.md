@@ -9,11 +9,11 @@
 # OpnForm, verified and packaged by Elestio
 
 [OpnForm](https://opnform.com), create beautiful forms and share them anywhere. It super fast, you don't need to know how to code. Get started for free!
-<img src="https://github.com/elestio-examples/opnform/blob/master/screenshot.png?raw=true" alt="opnform" width="800">
+<img src="https://github.com/elestio-examples/opnform/raw/main/opnform.jpg" alt="opnform" width="800">
 
 Deploy a <a target="_blank" href="https://elest.io/open-source/opnform">fully managed OpnForm</a> on <a target="_blank" href="https://elest.io/">elest.io</a> if you want automated backups, reverse proxy with SSL termination, firewall, automated OS & Software updates, and a team of Linux experts and open source enthusiasts to ensure your services are always safe, and functional.
 
-[![deploy](https://github.com/elestio-examples/opnform/blob/master/deploy-on-elestio.png?raw=true)](https://dash.elest.io/deploy?source=cicd&social=dockerCompose&url=https://github.com/elestio-examples/opnform)
+[![deploy](https://github.com/elestio-examples/opnform/raw/main/deploy-on-elestio.png)](https://dash.elest.io/deploy?source=cicd&social=dockerCompose&url=https://github.com/elestio-examples/opnform)
 
 # Why use Elestio images?
 
