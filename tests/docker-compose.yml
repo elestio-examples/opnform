@@ -27,7 +27,7 @@ services:
       "
 
   opnform:
-    image: elestio/opnform:${SOFTWARE_VERSION_TAG}
+    image: elestio4test/opnform:latest
     restart: always
     volumes:
       - ./forms:/persist
@@ -52,15 +52,3 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     ports:
       - "172.17.0.1:27779:5432"
-
-  pgadmin4:
-    image: elestio/pgadmin:latest
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${ADMIN_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${ADMIN_PASSWORD}
-      PGADMIN_LISTEN_PORT: 8080
-    ports:
-      - "172.17.0.1:49969:8080"
-    volumes:
-      - ./servers.json:/pgadmin4/servers.json
