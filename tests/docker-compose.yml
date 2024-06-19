@@ -31,7 +31,7 @@ services:
     restart: always
     volumes:
       - ./forms:/persist
-      - ./.env:/app/.env
+      - ${folderName}/.env:/app/.env
     ports:
       - 172.17.0.1:35551:80
     depends_on:
