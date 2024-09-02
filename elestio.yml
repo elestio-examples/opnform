@@ -32,6 +32,8 @@ environments:
     value: "[EMAIL]"
   - key: "ADMIN_PASSWORD"
     value: "random_password"
+  - key: "SELF_HOSTED"
+    value: "false"
   - key: "APP_NAME"
     value: "OpnForm"
   - key: "APP_ENV"
