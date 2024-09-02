@@ -23,16 +23,13 @@ ports:
     public: true
     path: "/"
     isAuth: false
-
 environments:
   - key: "SOFTWARE_VERSION_TAG"
     value: "latest"
   - key: "DOMAIN"
-    value: "[DOMAIN]"
-  - key: "SELF_HOSTED"
-    value: "false"
+    value: "[CI_CD_DOMAIN]"
   - key: "ADMIN_EMAIL"
-    value: "[ADMIN_EMAIL]"
+    value: "[EMAIL]"
   - key: "ADMIN_PASSWORD"
     value: "random_password"
   - key: "APP_NAME"
@@ -167,8 +164,8 @@ webUI:
   - url: "https://[CI_CD_DOMAIN]"
     label: "OpnForm"
     login: "[ADMIN_EMAIL]"
-    password: "random_password"
+    password: "[ADMIN_PASSWORD]"
   - url: "https://[CI_CD_DOMAIN]:20551"
     label: "pgAdmin"
     login: "[ADMIN_EMAIL]"
-    password: "random_password"
+    password: "[ADMIN_PASSWORD]"
