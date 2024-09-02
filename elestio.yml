@@ -28,6 +28,8 @@ environments:
     value: "latest"
   - key: "DOMAIN"
     value: "[CI_CD_DOMAIN]"
+  - key: "SELF_HOSTED"
+    value: "false"
   - key: "ADMIN_EMAIL"
     value: "[EMAIL]"
   - key: "ADMIN_PASSWORD"
@@ -42,6 +44,14 @@ environments:
     value: "debug"
   - key: "APP_URL"
     value: "https://[CI_CD_DOMAIN]"
+  - key: NUXT_PUBLIC_APP_URL
+    value: "/"
+  - key: NUXT_PUBLIC_API_BASE
+    value: "/api"
+  - key: NUXT_PRIVATE_API_BASE
+    value: "http://ingress/api"
+  - key: NUXT_PUBLIC_ENV
+    value: "dev"
   - key: "LOG_CHANNEL"
     value: "errorlog"
   - key: "LOG_LEVEL"

@@ -1,10 +1,20 @@
 set env vars
 set -o allexport; source .env; set +o allexport;
 
+
+generate_secret() {
+  LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c 40 ; echo ''
+}
+
+SHARED_SECRET=$(generate_secret)
+
 cat << EOT >> ./.env
 
-APP_KEY=
-JWT_SECRET=
+APP_KEY=$(openssl rand -base64 32)
+JWT_SECRET=$SHARED_SECRET
+SHARED_SECRET=$SHARED_SECRET
+NUXT_API_SECRET=$SHARED_SECRET
+FRONT_API_SECRET=$SHARED_SECRET
 EOT
 
 cat <<EOT > ./servers.json
