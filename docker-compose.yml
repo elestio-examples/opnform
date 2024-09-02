@@ -44,7 +44,7 @@ services:
     - ./.env:/usr/share/nginx/html/.env
 
   api-worker:
-    image: jhumanj/opnform-api:latest
+    image: jhumanj/opnform-api:$SOFTWARE_VERSION_TAG
     command: php artisan queue:work
     environment:
       <<: *api-environment
@@ -55,7 +55,7 @@ services:
     - ./opnform/opnform_storage:/usr/share/nginx/html/storage:rw
 
   ui:
-    image: jhumanj/opnform-client:latest
+    image: jhumanj/opnform-client:$SOFTWARE_VERSION_TAG
     env_file: 
     - ./.env
     volumes:
