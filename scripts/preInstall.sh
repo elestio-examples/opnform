@@ -1,6 +1,10 @@
 set env vars
 set -o allexport; source .env; set +o allexport;
 
+mkdir -p ./opnform
+mkdir -p ./opnform/opnform_storage
+chmod -R 777 ./opnform/opnform_storage
+
 cat /opt/elestio/startPostfix.sh > post.txt
 filename="./post.txt"
 

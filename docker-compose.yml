@@ -15,7 +15,6 @@ services:
   # This service just makes sure a bucket with the right policies is created
   createbuckets:
     image: minio/mc
-    restart: always
     depends_on:
       - minio
     entrypoint: >
