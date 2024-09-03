@@ -15,6 +15,7 @@ services:
   # This service just makes sure a bucket with the right policies is created
   createbuckets:
     image: minio/mc
+    restart: always
     depends_on:
       - minio
     entrypoint: >
@@ -28,6 +29,7 @@ services:
 
   api: &api
     image: jhumanj/opnform-api:$SOFTWARE_VERSION_TAG
+    restart: always
     environment: &api-environment  # Add this anchor
       DB_HOST: $DB_HOST
       REDIS_HOST: redis
@@ -46,6 +48,7 @@ services:
   api-worker:
     image: jhumanj/opnform-api:$SOFTWARE_VERSION_TAG
     command: php artisan queue:work
+    restart: always
     environment:
       <<: *api-environment
       IS_API_WORKER: "true"
@@ -56,6 +59,7 @@ services:
 
   ui:
     image: jhumanj/opnform-client:$SOFTWARE_VERSION_TAG
+    restart: always
     env_file: 
     - ./.env
     volumes:
@@ -63,6 +67,7 @@ services:
 
   ingress:
     image: nginx:1
+    restart: always
     volumes:
       - ./nginx.conf:/etc/nginx/templates/default.conf.template
     ports:

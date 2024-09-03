@@ -97,7 +97,7 @@ environments:
   - key: "MAIL_USERNAME"
     value: "[DOMAIN]@vm.elestio.app"
   - key: "MAIL_PASSWORD"
-    value: "null"
+    value: ""
   - key: "MAIL_ENCRYPTION"
     value: "tls"
   - key: "MAIL_FROM_ADDRESS"
