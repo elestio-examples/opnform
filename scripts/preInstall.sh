@@ -3,12 +3,11 @@ set -o allexport; source .env; set +o allexport;
 
 mkdir -p ./opnform
 mkdir -p ./opnform/opnform_storage
-mkdir -p opnform/opnform_storage/storage/framework 
 chmod -R 777 ./opnform/opnform_storage
-chmod -R 777 ./opnform/opnform_storage/storage
-chmod -R 777 ./opnform/opnform_storage/framework
 
-curl -o opnform/opnform_storage/storage/framework/disposable_domains.json https://raw.githubusercontent.com/JhumanJ/OpnForm/main/api/storage/framework/disposable_domains.json
+git clone --depth 1 --filter=blob:none --sparse https://github.com/JhumanJ/OpnForm.git && cd OpnForm && git sparse-checkout set api/storage
+cd ..; mv OpnForm/api/storage storage;
+rm -rf OpnForm
 
 cat /opt/elestio/startPostfix.sh > post.txt
 filename="./post.txt"
