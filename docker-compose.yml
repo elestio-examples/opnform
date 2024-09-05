@@ -41,7 +41,7 @@ services:
     env_file: 
     - ./.env
     volumes:
-    - ./opnform/opnform_storage:/usr/share/nginx/html/storage:rw
+    - ./storage:/usr/share/nginx/html/storage:rw
     - ./.env:/usr/share/nginx/html/.env
 
   api-worker:
