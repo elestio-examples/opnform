@@ -11,7 +11,7 @@ services:
       MINIO_ROOT_USER: minio
       MINIO_ROOT_PASSWORD: ${ADMIN_PASSWORD}
     volumes:
-      - ./s3_data:/data
+      - ./opnform/s3_data:/data
   # This service just makes sure a bucket with the right policies is created
   createbuckets:
     image: minio/mc
@@ -26,26 +26,63 @@ services:
       exit 0;
       "
 
-  opnform:
-    image: elestio/opnform:${SOFTWARE_VERSION_TAG}
+  api: &api
+    image: jhumanj/opnform-api:$SOFTWARE_VERSION_TAG
+    restart: always
+    environment: &api-environment  # Add this anchor
+      DB_HOST: $DB_HOST
+      REDIS_HOST: redis
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_CONNECTION: ${DB_CONNECTION:-pgsql}
+      FILESYSTEM_DISK: local
+      LOCAL_FILESYSTEM_VISIBILITY: public
+    env_file: 
+    - ./.env
+    volumes:
+    - ./storage:/usr/share/nginx/html/storage:rw
+    - ./.env:/usr/share/nginx/html/.env
+
+  api-worker:
+    image: jhumanj/opnform-api:$SOFTWARE_VERSION_TAG
+    command: php artisan queue:work
+    restart: always
+    environment:
+      <<: *api-environment
+      IS_API_WORKER: "true"
+    env_file:
+    - ./.env
+    volumes:
+    - ./opnform/opnform_storage:/usr/share/nginx/html/storage:rw
+
+  ui:
+    image: jhumanj/opnform-client:$SOFTWARE_VERSION_TAG
+    restart: always
+    env_file: 
+    - ./.env
+    volumes:
+      - ./.env:/app/.env
+
+  ingress:
+    image: nginx:1
     restart: always
     volumes:
-      - ./forms:/persist
-      - ./.env:/app/.env
+      - ./nginx.conf:/etc/nginx/templates/default.conf.template
     ports:
       - 172.17.0.1:35551:80
-    depends_on:
-      - postgres
+
   redis:
     image: elestio/redis:7.0
     restart: always
     volumes:
-      - ./redis-data:/data
-  postgres:
-    image: elestio/postgres:15
+      - ./opnform/redis-data:/data
+
+  db:
+    image: elestio/postgres:16
     restart: always
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+      - ./opnform/postgres-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=${DB_DATABASE}
       - POSTGRES_USER=${DB_USERNAME}
