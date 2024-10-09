@@ -39,10 +39,10 @@ services:
       FILESYSTEM_DISK: local
       LOCAL_FILESYSTEM_VISIBILITY: public
     env_file: 
-    - ./.env
+      - ./.env
     volumes:
-    - ./storage:/usr/share/nginx/html/storage:rw
-    - ./.env:/usr/share/nginx/html/.env
+      - storage:/usr/share/nginx/html/storage:rw
+      - ./.env:/usr/share/nginx/html/.env
 
   api-worker:
     image: jhumanj/opnform-api:$SOFTWARE_VERSION_TAG
@@ -52,15 +52,15 @@ services:
       <<: *api-environment
       IS_API_WORKER: "true"
     env_file:
-    - ./.env
+      - ./.env
     volumes:
-    - ./opnform/opnform_storage:/usr/share/nginx/html/storage:rw
+      - storage:/usr/share/nginx/html/storage:rw
 
   ui:
     image: jhumanj/opnform-client:$SOFTWARE_VERSION_TAG
     restart: always
     env_file: 
-    - ./.env
+      - ./.env
     volumes:
       - ./.env:/app/.env
 
@@ -101,3 +101,11 @@ services:
       - "172.17.0.1:49969:8080"
     volumes:
       - ./servers.json:/pgadmin4/servers.json
+
+volumes:
+  storage:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/storage
+      o: bind
