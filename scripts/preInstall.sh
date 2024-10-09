@@ -5,9 +5,9 @@ mkdir -p ./opnform
 mkdir -p ./opnform/opnform_storage
 chmod -R 777 ./opnform/opnform_storage
 
-git clone --depth 1 --filter=blob:none --sparse https://github.com/JhumanJ/OpnForm.git && cd OpnForm && git sparse-checkout set api/storage
-cd ..; mv OpnForm/api/storage storage;
-rm -rf OpnForm
+mkdir -p ./storage
+chown -R 1000:1000 ./storage
+
 
 cat /opt/elestio/startPostfix.sh > post.txt
 filename="./post.txt"
